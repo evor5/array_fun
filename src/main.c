@@ -84,80 +84,25 @@ void task4(){
 // }
 
 
-void arr_plus(int* arr, int* arr2, int size, int size2){
+void arr_plus(int* arr, int* arr2, int size){
     for(int i = 0; i < size; i++){
         printf("| %d + %d = %d |\n", arr[i], arr2[i], arr[i] + arr2[i]);
     }
 }
 
-void arr_minus(int* arr, int* arr2, int size, int size2){
+void arr_minus(int* arr, int* arr2, int size){
     for(int i = 0; i < size; i++){
         printf("| %d - %d = %d |\n", arr[i], arr2[i], arr[i] - arr2[i]);
     }
 }
 
-void arr_multiply(int* arr, int* arr2, int size, int size2){
+void arr_multiply(int* arr, int* arr2, int size){
     for(int i = 0; i < size; i++){
         printf("| %d * %d = %d |\n", arr[i], arr2[i], arr[i] * arr2[i]);
     }
 }
 
-void arr_division(int* arr, int* arr2, int size, int size2){
-    for(int i = 0; i < size; i++){
-        if(arr2[i] != 0){
-            printf("| %d / %d = %d |\n", arr[i], arr2[i], arr[i] / arr2[i]);
-        }
-        else{
-            printf("na 0 delit nelzya))\n");
-        }
-    }
-}
-
-void arr2_plus(int* arr, int* arr2, int size, int size2){
-    for(int i = 0; i < size2; i++){
-        printf("| %d + %d = %d |\n", arr[i], arr2[i], arr[i] + arr2[i]);
-    }
-}
-
-void arr2_minus(int* arr, int* arr2, int size, int size2){
-    for(int i = 0; i < size2; i++){
-        printf("| %d - %d = %d |\n", arr[i], arr2[i], arr[i] - arr2[i]);
-    }
-}
-
-void arr2_multiply(int* arr, int* arr2, int size, int size2){
-    for(int i = 0; i < size2; i++){
-        printf("| %d * %d = %d |\n", arr[i], arr2[i], arr[i] * arr2[i]);
-    }
-}
-
-void arr2_division(int* arr, int* arr2, int size, int size2){
-    for(int i = 0; i < size2; i++){
-        if(arr2[i] != 0){
-            printf("| %d / %d = %d |\n", arr[i], arr2[i], arr[i] / arr2[i]);
-        }
-        else{
-            printf("na 0 delit nelzya))\n");
-        }
-    }
-}
-
-void arr3_plus(int* arr, int* arr2, int size, int size2){
-    for(int i = 0; i < size; i++){
-        printf("| %d + %d = %d |\n", arr[i], arr2[i], arr[i] + arr2[i]);
-    }
-}
-void arr3_minus(int* arr, int* arr2, int size, int size2){
-    for(int i = 0; i < size; i++){
-        printf("| %d - %d = %d |\n", arr[i], arr2[i], arr[i] - arr2[i]);
-    }
-}
-void arr3_multiply(int* arr, int* arr2, int size, int size2){
-    for(int i = 0; i < size; i++){
-        printf("| %d * %d = %d |\n", arr[i], arr2[i], arr[i] * arr2[i]);
-    }
-}
-void arr3_division(int* arr, int* arr2, int size, int size2){
+void arr_division(int* arr, int* arr2, int size){
     for(int i = 0; i < size; i++){
         if(arr2[i] != 0){
             printf("| %d / %d = %d |\n", arr[i], arr2[i], arr[i] / arr2[i]);
@@ -197,66 +142,41 @@ void task5(){
     scanf("%c", &op);
     op2 = (int)op;
 
+    int max_size, min_size;
     if(size > size2){
-        arr2 = (int*)realloc(arr2, sizeof(int) * size);
-        for(int i = size2; i < size; i++){
+        max_size = size;
+        min_size =size2;
+        arr2 = (int*)realloc(arr2, sizeof(int) * max_size);
+        for(int i = min_size; i < max_size; i++){
             arr2[i] = 1;
             printf("%d\n", arr2[i]);
         }
-        if(op2 == 43){
-            arr_plus(arr, arr2, size, size2);
-        }
-        else if(op2 == 45){
-            arr_minus(arr, arr2, size, size2);
-        }
-        else if(op2 == 42){
-            arr_multiply(arr, arr2, size, size2);
-        }
-        else if(op2 == 47){
-            arr_division(arr, arr2, size, size2);
-        }
-        else {
-            printf("wrong operation >:(\n");
-        }
     }
-    else if(size2 > size){
-        arr = (int*)realloc(arr, sizeof(int) * size2);
-        for(int i = size; i < size2; i++){
+    else{
+        max_size = size2;
+        min_size =size;
+        arr = (int*)realloc(arr, sizeof(int) * max_size);
+        for(int i = min_size; i < max_size; i++){
             arr[i] = 1;
             printf("%d\n", arr[i]);
         }
-        if(op2 == 43){
-            arr2_plus(arr, arr2, size, size2);
-        }
-        else if(op2 == 45){
-            arr2_minus(arr, arr2, size, size2);
-        }
-        else if(op2 == 42){
-            arr2_multiply(arr, arr2, size, size2);
-        }
-        else if(op2 == 47){
-            arr2_division(arr, arr2, size, size2);
-        }
-        else {
-            printf("wrong operation >:(\n");
-        }
     }
-    else{
-        if(op2 == 43){
-            arr3_plus(arr, arr2, size, size2);
-        }
-        else if(op2 == 45){
-            arr3_minus(arr, arr2, size, size2);
-        }
-        else if(op2 == 42){
-            arr3_multiply(arr, arr2, size, size2);
-        }
-        else if(op2 == 47){
-            arr3_division(arr, arr2, size, size2);
-        }
-        else {
-            printf("wrong operation >:(\n");
-        }
+    
+
+    if(op2 == '+'){
+        arr_plus(arr, arr2, max_size);
+    }
+    else if(op2 == '-'){
+        arr_minus(arr, arr2, max_size);
+    }
+    else if(op2 == '*'){
+        arr_multiply(arr, arr2, max_size);
+    }
+    else if(op2 == '/'){
+        arr_division(arr, arr2, max_size);
+    }
+    else {
+        printf("wrong operation >:(\n");
     }
 }
 
