@@ -4,4 +4,8 @@ all: src/main.c
 run:
 	./build/main.exe
 clean: 
-	del /q /f build\main.exe
+ifeq ($(OS),Windows_NT)
+	rmdir /q /s build
+else 
+	rm -rf build
+endif
