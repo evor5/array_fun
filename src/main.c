@@ -1,6 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h> 
 
+struct Dinosaur{
+    const char* name;
+    int age;
+    const char* gender;
+    int dmg;
+    
+    void (*first_skill)();
+    int (*attack)(struct Dinosaur* dyno);
+};
+
+double get_interpolated_value(double x, double x0, double x1, double y0, double y1){
+    double result = y0 + ((y1 - y0)/(x1 - x0)) * (x - x0);
+    return result;
+}
+
+int attack(struct Dinosaur* dyno){
+    double total_damage;
+    if(dyno->age >= 0 && dyno->age <= 70){
+        total_damage = get_interpolated_value(dyno->age, 0, 70, 0, dyno->dmg);
+    }
+    else if(dyno->age >= 70 && dyno->age <= 120){
+        total_damage = get_interpolated_value(dyno->age, 70, 120, dyno->dmg, dyno->dmg);
+    }
+    else if(dyno->age >= 120 && dyno->age <= 150){
+        total_damage = get_interpolated_value(dyno->age, 120, 150, dyno->dmg, 0);
+    }
+    printf("%s in %d y.o caused %f damage\n",dyno->name,dyno->age, total_damage);
+}
+
 void task1(){
     int arr[] = {1, 8, 2, 4, 27, 18, 2};
     int arr2[] = {2, 9, 8, 1};
@@ -275,6 +304,26 @@ void task8(){
     show_arr_info(arr, size);
 }
 
+void task9(){
+    struct Dinosaur rex;
+    rex.age = 0;
+    rex.dmg = 100;
+    rex.gender = "male";
+    rex.name = "rex";
+    rex.attack = attack;
+    struct Dinosaur phila;
+    phila.age = 0;
+    phila.dmg = 70;
+    phila.gender = "female";
+    phila.name = "phila";
+    phila.attack = attack;
+    for(int i = 0; i < 151; i++){
+        rex.attack(&rex);
+        rex.age++;
+        phila.attack(&phila);
+        phila.age++;
+    }
+}
 int main() {
     int input;
 
@@ -306,6 +355,9 @@ int main() {
     }
     else if(input == 8){
         task8();
+    }
+    else if(input == 9){
+        task9();
     }
     else {
         printf("wrong number of task");
