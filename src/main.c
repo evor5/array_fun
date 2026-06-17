@@ -324,6 +324,64 @@ void task9(){
         phila.age++;
     }
 }
+
+void print_2d_array(int matrix[][4], int rows, int columns){
+    for(int i = 0; i < rows; i++){
+        for(int j = 0; j < columns; j++){
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void get_sum_of_all_rows_and_columns(int matrix[][4], const int rows, const int columns){
+    int* sum_array = (int*)malloc((rows + columns) * sizeof(int));
+    int sum_index = 0;
+    int sum = 0;
+    for(int i = 0; i < rows; i++){
+        for(int j = 0; j < columns; j++){
+            sum += matrix[i][j];
+        }
+        sum_array[sum_index++] = sum;
+        sum = 0;
+    }
+    for(int i = 0; i < columns; i++){
+        for(int j = 0; j < rows; j++){
+            sum += matrix[j][i];
+        }
+        sum_array[sum_index++] = sum;
+        sum = 0;
+    }
+    for(int i = 0, j = 1; i < rows + columns; i++){
+        if (i < rows){
+            printf("sum of #%d row : %d\n", i+1, sum_array[i]);
+        }
+        else{
+            printf("sum of #%d column : %d\n", j, sum_array[i]);
+            j++;
+        }
+    }
+}
+
+void task10(){
+    int matrix[3][4] = { 
+        {1, 4, 2, 5}, 
+        {3, 6, 8, 2},
+        {9, 7, 3, 1} 
+    };
+    int sum = 0;
+
+    print_2d_array(matrix, 3, 4);
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 4; j++){
+            sum += matrix[i][j];
+        }
+    }
+    printf("sum = %d\n", sum);
+
+    get_sum_of_all_rows_and_columns(matrix, 3, 4);
+}
+
 int main() {
     int input;
 
@@ -358,6 +416,9 @@ int main() {
     }
     else if(input == 9){
         task9();
+    }
+    else if(input == 10){
+        task10();
     }
     else {
         printf("wrong number of task");
